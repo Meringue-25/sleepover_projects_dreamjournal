@@ -1,5 +1,10 @@
+import { api } from "~/trpc/server";
+
 const HomePage = () => {
-  return <div>HomePage</div>;
+  const greeting = api.dream.greet({
+    person: "Yuki",  
+  })
+  return <div>{greeting}</div>;
 };
 
 export default HomePage;
