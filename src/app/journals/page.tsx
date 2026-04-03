@@ -1,16 +1,13 @@
+import DreamListView from "~/components/DreamListView";
 import Navbar from "~/components/Navbar";
-import { api } from "~/trpc/server";
+import { NewDreamEntry } from "~/components/NewDreamEntry";
 
 const HomePage = () => {
-  const greeting = api.dream.greet({
-    person: "Yuki",  
-  })
-
   return (
     <>
       <Navbar />
-      <h1>Journals!</h1>
-    <span>{greeting}</span>
+      <NewDreamEntry />
+      <DreamListView />
     </>
   );
 };
