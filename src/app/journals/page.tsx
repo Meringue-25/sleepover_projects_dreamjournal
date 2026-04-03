@@ -9,6 +9,7 @@ const HomePage = () => {
   return (
     <>
       <Navbar />
+      <h1>Journals!</h1>
     <span>{greeting}</span>
     </>
   );
