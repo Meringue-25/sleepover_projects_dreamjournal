@@ -16,4 +16,28 @@ export const dreamRouter = createTRPCRouter({
     .query(({ input }) => {
       return "Hello " + input.person;
     }),
+
+  new: publicProcedure
+    .input(
+      z.object({
+        label: z.string(),
+      }),
+    )
+
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.db.dreamEntry.create({
+        data: {
+          label: input.label,
+          entry: "",
+        },
+      });
+    }),
+
+  getAll: publicProcedure.query(async ({ ctx }) => {
+    return await ctx.db.dreamEntry.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+  }),
 });
