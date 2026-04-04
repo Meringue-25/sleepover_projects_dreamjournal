@@ -1,17 +1,20 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { api } from "~/trpc/react";
 
 export const NewDreamEntry = () => {
   const utils = api.useUtils();
+  const router = useRouter();
 
   const { mutate: newDream, status } = api.dream.new.useMutation({
     onMutate: () => {
       setLabel("");
     },
-    onSuccess: async () => {
+    onSuccess: async (createdDream) => {
       await utils.dream.getAll.invalidate();
+      router.push(`/journals/${createdDream.id}`);
     },
   });
   const [label, setLabel] = useState("");
