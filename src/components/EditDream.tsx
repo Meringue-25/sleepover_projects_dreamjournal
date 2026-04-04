@@ -38,6 +38,8 @@ export const EditDream = ({ id }: Props) => {
           if (!dream) {
             return;
           }
+
+          update(dream);
         }}
       >
         Save
