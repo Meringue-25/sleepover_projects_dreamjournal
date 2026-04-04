@@ -1,24 +1,31 @@
 import { redirect } from "next/navigation";
-import { api } from "~/trpc/server";
+import EditDream from "~/components/EditDream";
+import Navbar from "~/components/Navbar";
+import { api, HydrateClient } from "~/trpc/server";
 
 type Props = {
-    params: {
-        id: string;
-    }
-}
+  params: Promise<{
+    id: string;
+  }>;
+};
 
-const ViewJournal = async ({ params}: Props) => {
-    const { id } = await params;
-    const journal = await api.dream.get({ id });
-    
-    if (journal === null ) {
-        // Invalid journal id
-        return redirect("/journals")
-    }
+const ViewJournal = async ({ params }: Props) => {
+  const { id } = await params;
+  const journal = await api.dream.get({ id });
 
-    return (
-    <pre>{JSON.stringify(journal, null, 2)}</pre>
-  )
-}
+  if (journal === null) {
+    // Invalid journal id
+    return redirect("/journals");
+  }
+  await api.dream.get.prefetch({ id });
+  return (
+    <>
+      <Navbar />
+      <HydrateClient>
+          <EditDream id={id} />
+      </HydrateClient>
+    </>
+  );
+};
 
-export default ViewJournal
+export default ViewJournal;
