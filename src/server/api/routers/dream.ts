@@ -55,4 +55,24 @@ export const dreamRouter = createTRPCRouter({
         },
       });
     }),
+
+  update: publicProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        label: z.string(),
+        entry: z.string(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.db.dreamEntry.update({
+        where: {
+          id: input.id,
+        },
+        data: {
+          label: input.label,
+          entry: input.entry,
+        },
+      });
+    }),
 });
