@@ -20,6 +20,7 @@ const HomePage = async () => {
           <span>Welcome back,</span>
           {session.user.image && (
             <Image
+              className="m-4 size-20 rounded-full shadow"
               alt={session.user.name || "blank image"}
               src={session.user.image}
               width={100}
