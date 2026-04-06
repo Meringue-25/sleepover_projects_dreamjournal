@@ -20,7 +20,7 @@ export const NewDreamEntry = () => {
   });
   const [label, setLabel] = useState("");
   return (
-    <div className="justfiy-center flex items-center gap-4">
+    <div className="flex w-full items-center justify-center gap-4">
       <input
         className="border-accent-400 rounded-xl border p-4"
         value={label}
