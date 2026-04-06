@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { utils } from "prettier/doc.js";
 import { api } from "~/trpc/react";
 
@@ -10,6 +11,12 @@ type Props = {
 export const EditDream = ({ id }: Props) => {
   const { data: dream } = api.dream.get.useQuery({ id });
   const utils = api.useUtils();
+  const router = useRouter();
+  const { mutate: deleteDream } = api.dream.delete.useMutation({
+    onSuccess: () => {
+      utils.dream.getAll.invalidate();
+    },
+  });
 
   const { mutate: update, status: updateStatus } = api.dream.update.useMutation(
     {
@@ -59,6 +66,22 @@ export const EditDream = ({ id }: Props) => {
       >
         Save
       </button>
+      <div
+        id="confirm-delete"
+        popover="auto"
+        className="absolute top-1/2 left-1/2 translate-x-1/2 -translate-y-1/2 p-4"
+      >
+        <button
+          onClick={() => {
+            if (!dream) return;
+            deleteDream({ id: dream.id });
+            router.push("/journals");
+          }}
+        >
+          Confirm Delete
+        </button>
+      </div>
+      <button popoverTarget="confirm-delete">Delete</button>
     </div>
   );
 };
