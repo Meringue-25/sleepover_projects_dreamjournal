@@ -1,9 +1,9 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { utils } from "prettier/doc.js";
 import { api } from "~/trpc/react";
 import { Button } from "./Button";
+import { useState } from "react";
 
 type Props = {
   id: string;
@@ -13,6 +13,7 @@ export const EditDream = ({ id }: Props) => {
   const { data: dream } = api.dream.get.useQuery({ id });
   const utils = api.useUtils();
   const router = useRouter();
+  const [synced, setSynced] = useState(true);
   const { mutate: deleteDream } = api.dream.delete.useMutation({
     onSuccess: () => {
       utils.dream.getAll.invalidate();
@@ -23,12 +24,21 @@ export const EditDream = ({ id }: Props) => {
     {
       onSuccess: () => {
         utils.dream.getAll.invalidate();
+        setSynced(true);
       },
     },
   );
 
   return (
     <div className="flex flex-col">
+      <span>
+        {updateStatus === "pending"
+          ? "syncing"
+          : synced
+            ? "synced"
+            : "not synced"}
+      </span>
+
       <input
         type="text"
         value={dream?.label}
@@ -36,7 +46,7 @@ export const EditDream = ({ id }: Props) => {
           if (dream === undefined || dream === null) {
             return;
           }
-
+          setSynced(false);
           utils.dream.get.setData({ id }, { ...dream, label: e.target.value });
         }}
       />
@@ -51,11 +61,12 @@ export const EditDream = ({ id }: Props) => {
           if (dream === undefined || dream === null) {
             return;
           }
-
+          setSynced(false);
           utils.dream.get.setData({ id }, { ...dream, entry: e.target.value });
         }}
       ></textarea>
       <Button
+        disabled={updateStatus === "pending"}
         onClick={() => {
           if (!dream) {
             return;

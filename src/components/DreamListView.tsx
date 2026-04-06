@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { api } from "~/trpc/react";
+import { LoaderCircle } from "lucide-react";
 
 type Props = {};
 
@@ -11,7 +12,9 @@ const DreamListView = ({}: Props) => {
   return (
     <div className="mx-auto mt-4 w-3/5">
       {status === "pending" ? (
-        <h1>Loading...</h1>
+        <div className="mx-auto w-full">
+          <LoaderCircle size={32} className="mx-auto animate-spin" />
+        </div>
       ) : (
         <ul className="flex flex-wrap gap-4">
           {dreams?.map((d) => (
