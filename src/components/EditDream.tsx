@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { utils } from "prettier/doc.js";
 import { api } from "~/trpc/react";
+import { Button } from "./Button";
 
 type Props = {
   id: string;
@@ -54,8 +55,7 @@ export const EditDream = ({ id }: Props) => {
           utils.dream.get.setData({ id }, { ...dream, entry: e.target.value });
         }}
       ></textarea>
-      <button
-        className="cursor-pointer rounded-xl bg-pink-200 p-4 py-1"
+      <Button
         onClick={() => {
           if (!dream) {
             return;
@@ -65,13 +65,13 @@ export const EditDream = ({ id }: Props) => {
         }}
       >
         Save
-      </button>
+      </Button>
       <div
         id="confirm-delete"
         popover="auto"
-        className="absolute top-1/2 left-1/2 translate-x-1/2 -translate-y-1/2 p-4"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-4"
       >
-        <button
+        <Button
           onClick={() => {
             if (!dream) return;
             deleteDream({ id: dream.id });
@@ -79,7 +79,7 @@ export const EditDream = ({ id }: Props) => {
           }}
         >
           Confirm Delete
-        </button>
+        </Button>
       </div>
       <button popoverTarget="confirm-delete">Delete</button>
     </div>

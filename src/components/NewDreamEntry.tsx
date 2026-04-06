@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { api } from "~/trpc/react";
+import { Button } from "./Button";
 
 export const NewDreamEntry = () => {
   const utils = api.useUtils();
@@ -27,13 +28,12 @@ export const NewDreamEntry = () => {
           setLabel(e.target.value);
         }}
       />
-      <button
+      <Button
         disabled={status === "pending"}
-        className="bg-primary-500 rounded-xl p-2"
         onClick={() => newDream({ label })}
       >
         NewDreamEntry
-      </button>
+      </Button>
     </div>
   );
 };
