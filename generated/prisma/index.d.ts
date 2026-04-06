@@ -1227,11 +1227,13 @@ export namespace Prisma {
   export type UserCountOutputType = {
     accounts: number
     sessions: number
+    dreamEntries: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
+    dreamEntries?: boolean | UserCountOutputTypeCountDreamEntriesArgs
   }
 
   // Custom InputTypes
@@ -1257,6 +1259,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SessionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountDreamEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DreamEntryWhereInput
   }
 
 
@@ -3671,6 +3680,7 @@ export namespace Prisma {
     image?: boolean
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
+    dreamEntries?: boolean | User$dreamEntriesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3702,6 +3712,7 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
+    dreamEntries?: boolean | User$dreamEntriesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3712,6 +3723,7 @@ export namespace Prisma {
     objects: {
       accounts: Prisma.$AccountPayload<ExtArgs>[]
       sessions: Prisma.$SessionPayload<ExtArgs>[]
+      dreamEntries: Prisma.$DreamEntryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4115,6 +4127,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    dreamEntries<T extends User$dreamEntriesArgs<ExtArgs> = {}>(args?: Subset<T, User$dreamEntriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DreamEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4583,6 +4596,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.dreamEntries
+   */
+  export type User$dreamEntriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DreamEntry
+     */
+    select?: DreamEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the DreamEntry
+     */
+    omit?: DreamEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DreamEntryInclude<ExtArgs> | null
+    where?: DreamEntryWhereInput
+    orderBy?: DreamEntryOrderByWithRelationInput | DreamEntryOrderByWithRelationInput[]
+    cursor?: DreamEntryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DreamEntryScalarFieldEnum | DreamEntryScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4616,6 +4653,7 @@ export namespace Prisma {
     label: string | null
     entry: string | null
     createdAt: Date | null
+    userId: string | null
   }
 
   export type DreamEntryMaxAggregateOutputType = {
@@ -4623,6 +4661,7 @@ export namespace Prisma {
     label: string | null
     entry: string | null
     createdAt: Date | null
+    userId: string | null
   }
 
   export type DreamEntryCountAggregateOutputType = {
@@ -4630,6 +4669,7 @@ export namespace Prisma {
     label: number
     entry: number
     createdAt: number
+    userId: number
     _all: number
   }
 
@@ -4639,6 +4679,7 @@ export namespace Prisma {
     label?: true
     entry?: true
     createdAt?: true
+    userId?: true
   }
 
   export type DreamEntryMaxAggregateInputType = {
@@ -4646,6 +4687,7 @@ export namespace Prisma {
     label?: true
     entry?: true
     createdAt?: true
+    userId?: true
   }
 
   export type DreamEntryCountAggregateInputType = {
@@ -4653,6 +4695,7 @@ export namespace Prisma {
     label?: true
     entry?: true
     createdAt?: true
+    userId?: true
     _all?: true
   }
 
@@ -4733,6 +4776,7 @@ export namespace Prisma {
     label: string
     entry: string
     createdAt: Date
+    userId: string
     _count: DreamEntryCountAggregateOutputType | null
     _min: DreamEntryMinAggregateOutputType | null
     _max: DreamEntryMaxAggregateOutputType | null
@@ -4757,6 +4801,8 @@ export namespace Prisma {
     label?: boolean
     entry?: boolean
     createdAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["dreamEntry"]>
 
   export type DreamEntrySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4764,6 +4810,8 @@ export namespace Prisma {
     label?: boolean
     entry?: boolean
     createdAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["dreamEntry"]>
 
   export type DreamEntrySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4771,6 +4819,8 @@ export namespace Prisma {
     label?: boolean
     entry?: boolean
     createdAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["dreamEntry"]>
 
   export type DreamEntrySelectScalar = {
@@ -4778,18 +4828,31 @@ export namespace Prisma {
     label?: boolean
     entry?: boolean
     createdAt?: boolean
+    userId?: boolean
   }
 
-  export type DreamEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "label" | "entry" | "createdAt", ExtArgs["result"]["dreamEntry"]>
+  export type DreamEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "label" | "entry" | "createdAt" | "userId", ExtArgs["result"]["dreamEntry"]>
+  export type DreamEntryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type DreamEntryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type DreamEntryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
 
   export type $DreamEntryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "DreamEntry"
-    objects: {}
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       label: string
       entry: string
       createdAt: Date
+      userId: string
     }, ExtArgs["result"]["dreamEntry"]>
     composites: {}
   }
@@ -5184,6 +5247,7 @@ export namespace Prisma {
    */
   export interface Prisma__DreamEntryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5217,6 +5281,7 @@ export namespace Prisma {
     readonly label: FieldRef<"DreamEntry", 'String'>
     readonly entry: FieldRef<"DreamEntry", 'String'>
     readonly createdAt: FieldRef<"DreamEntry", 'DateTime'>
+    readonly userId: FieldRef<"DreamEntry", 'String'>
   }
     
 
@@ -5233,6 +5298,10 @@ export namespace Prisma {
      * Omit specific fields from the DreamEntry
      */
     omit?: DreamEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DreamEntryInclude<ExtArgs> | null
     /**
      * Filter, which DreamEntry to fetch.
      */
@@ -5252,6 +5321,10 @@ export namespace Prisma {
      */
     omit?: DreamEntryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DreamEntryInclude<ExtArgs> | null
+    /**
      * Filter, which DreamEntry to fetch.
      */
     where: DreamEntryWhereUniqueInput
@@ -5269,6 +5342,10 @@ export namespace Prisma {
      * Omit specific fields from the DreamEntry
      */
     omit?: DreamEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DreamEntryInclude<ExtArgs> | null
     /**
      * Filter, which DreamEntry to fetch.
      */
@@ -5318,6 +5395,10 @@ export namespace Prisma {
      */
     omit?: DreamEntryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DreamEntryInclude<ExtArgs> | null
+    /**
      * Filter, which DreamEntry to fetch.
      */
     where?: DreamEntryWhereInput
@@ -5366,6 +5447,10 @@ export namespace Prisma {
      */
     omit?: DreamEntryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DreamEntryInclude<ExtArgs> | null
+    /**
      * Filter, which DreamEntries to fetch.
      */
     where?: DreamEntryWhereInput
@@ -5409,6 +5494,10 @@ export namespace Prisma {
      */
     omit?: DreamEntryOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DreamEntryInclude<ExtArgs> | null
+    /**
      * The data needed to create a DreamEntry.
      */
     data: XOR<DreamEntryCreateInput, DreamEntryUncheckedCreateInput>
@@ -5440,6 +5529,10 @@ export namespace Prisma {
      * The data used to create many DreamEntries.
      */
     data: DreamEntryCreateManyInput | DreamEntryCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DreamEntryIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -5454,6 +5547,10 @@ export namespace Prisma {
      * Omit specific fields from the DreamEntry
      */
     omit?: DreamEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DreamEntryInclude<ExtArgs> | null
     /**
      * The data needed to update a DreamEntry.
      */
@@ -5506,6 +5603,10 @@ export namespace Prisma {
      * Limit how many DreamEntries to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DreamEntryIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -5520,6 +5621,10 @@ export namespace Prisma {
      * Omit specific fields from the DreamEntry
      */
     omit?: DreamEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DreamEntryInclude<ExtArgs> | null
     /**
      * The filter to search for the DreamEntry to update in case it exists.
      */
@@ -5546,6 +5651,10 @@ export namespace Prisma {
      * Omit specific fields from the DreamEntry
      */
     omit?: DreamEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DreamEntryInclude<ExtArgs> | null
     /**
      * Filter which DreamEntry to delete.
      */
@@ -5578,6 +5687,10 @@ export namespace Prisma {
      * Omit specific fields from the DreamEntry
      */
     omit?: DreamEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DreamEntryInclude<ExtArgs> | null
   }
 
 
@@ -6603,7 +6716,8 @@ export namespace Prisma {
     id: 'id',
     label: 'label',
     entry: 'entry',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    userId: 'userId'
   };
 
   export type DreamEntryScalarFieldEnum = (typeof DreamEntryScalarFieldEnum)[keyof typeof DreamEntryScalarFieldEnum]
@@ -6829,6 +6943,7 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
+    dreamEntries?: DreamEntryListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -6839,6 +6954,7 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     accounts?: AccountOrderByRelationAggregateInput
     sessions?: SessionOrderByRelationAggregateInput
+    dreamEntries?: DreamEntryOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -6852,6 +6968,7 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
+    dreamEntries?: DreamEntryListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -6884,6 +7001,8 @@ export namespace Prisma {
     label?: StringFilter<"DreamEntry"> | string
     entry?: StringFilter<"DreamEntry"> | string
     createdAt?: DateTimeFilter<"DreamEntry"> | Date | string
+    userId?: StringFilter<"DreamEntry"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type DreamEntryOrderByWithRelationInput = {
@@ -6891,6 +7010,8 @@ export namespace Prisma {
     label?: SortOrder
     entry?: SortOrder
     createdAt?: SortOrder
+    userId?: SortOrder
+    user?: UserOrderByWithRelationInput
   }
 
   export type DreamEntryWhereUniqueInput = Prisma.AtLeast<{
@@ -6901,6 +7022,8 @@ export namespace Prisma {
     label?: StringFilter<"DreamEntry"> | string
     entry?: StringFilter<"DreamEntry"> | string
     createdAt?: DateTimeFilter<"DreamEntry"> | Date | string
+    userId?: StringFilter<"DreamEntry"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type DreamEntryOrderByWithAggregationInput = {
@@ -6908,6 +7031,7 @@ export namespace Prisma {
     label?: SortOrder
     entry?: SortOrder
     createdAt?: SortOrder
+    userId?: SortOrder
     _count?: DreamEntryCountOrderByAggregateInput
     _max?: DreamEntryMaxOrderByAggregateInput
     _min?: DreamEntryMinOrderByAggregateInput
@@ -6921,6 +7045,7 @@ export namespace Prisma {
     label?: StringWithAggregatesFilter<"DreamEntry"> | string
     entry?: StringWithAggregatesFilter<"DreamEntry"> | string
     createdAt?: DateTimeWithAggregatesFilter<"DreamEntry"> | Date | string
+    userId?: StringWithAggregatesFilter<"DreamEntry"> | string
   }
 
   export type VerificationTokenWhereInput = {
@@ -7133,6 +7258,7 @@ export namespace Prisma {
     image?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
+    dreamEntries?: DreamEntryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -7143,6 +7269,7 @@ export namespace Prisma {
     image?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    dreamEntries?: DreamEntryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -7153,6 +7280,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
+    dreamEntries?: DreamEntryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -7163,6 +7291,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    dreamEntries?: DreamEntryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -7194,6 +7323,7 @@ export namespace Prisma {
     label: string
     entry: string
     createdAt?: Date | string
+    user: UserCreateNestedOneWithoutDreamEntriesInput
   }
 
   export type DreamEntryUncheckedCreateInput = {
@@ -7201,6 +7331,7 @@ export namespace Prisma {
     label: string
     entry: string
     createdAt?: Date | string
+    userId: string
   }
 
   export type DreamEntryUpdateInput = {
@@ -7208,6 +7339,7 @@ export namespace Prisma {
     label?: StringFieldUpdateOperationsInput | string
     entry?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutDreamEntriesNestedInput
   }
 
   export type DreamEntryUncheckedUpdateInput = {
@@ -7215,6 +7347,7 @@ export namespace Prisma {
     label?: StringFieldUpdateOperationsInput | string
     entry?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type DreamEntryCreateManyInput = {
@@ -7222,6 +7355,7 @@ export namespace Prisma {
     label: string
     entry: string
     createdAt?: Date | string
+    userId: string
   }
 
   export type DreamEntryUpdateManyMutationInput = {
@@ -7236,6 +7370,7 @@ export namespace Prisma {
     label?: StringFieldUpdateOperationsInput | string
     entry?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type VerificationTokenCreateInput = {
@@ -7511,11 +7646,21 @@ export namespace Prisma {
     none?: SessionWhereInput
   }
 
+  export type DreamEntryListRelationFilter = {
+    every?: DreamEntryWhereInput
+    some?: DreamEntryWhereInput
+    none?: DreamEntryWhereInput
+  }
+
   export type AccountOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type SessionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DreamEntryOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -7562,6 +7707,7 @@ export namespace Prisma {
     label?: SortOrder
     entry?: SortOrder
     createdAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type DreamEntryMaxOrderByAggregateInput = {
@@ -7569,6 +7715,7 @@ export namespace Prisma {
     label?: SortOrder
     entry?: SortOrder
     createdAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type DreamEntryMinOrderByAggregateInput = {
@@ -7576,6 +7723,7 @@ export namespace Prisma {
     label?: SortOrder
     entry?: SortOrder
     createdAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type VerificationTokenIdentifierTokenCompoundUniqueInput = {
@@ -7663,6 +7811,13 @@ export namespace Prisma {
     connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
   }
 
+  export type DreamEntryCreateNestedManyWithoutUserInput = {
+    create?: XOR<DreamEntryCreateWithoutUserInput, DreamEntryUncheckedCreateWithoutUserInput> | DreamEntryCreateWithoutUserInput[] | DreamEntryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DreamEntryCreateOrConnectWithoutUserInput | DreamEntryCreateOrConnectWithoutUserInput[]
+    createMany?: DreamEntryCreateManyUserInputEnvelope
+    connect?: DreamEntryWhereUniqueInput | DreamEntryWhereUniqueInput[]
+  }
+
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -7675,6 +7830,13 @@ export namespace Prisma {
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
     createMany?: SessionCreateManyUserInputEnvelope
     connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+  }
+
+  export type DreamEntryUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<DreamEntryCreateWithoutUserInput, DreamEntryUncheckedCreateWithoutUserInput> | DreamEntryCreateWithoutUserInput[] | DreamEntryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DreamEntryCreateOrConnectWithoutUserInput | DreamEntryCreateOrConnectWithoutUserInput[]
+    createMany?: DreamEntryCreateManyUserInputEnvelope
+    connect?: DreamEntryWhereUniqueInput | DreamEntryWhereUniqueInput[]
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -7709,6 +7871,20 @@ export namespace Prisma {
     deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
+  export type DreamEntryUpdateManyWithoutUserNestedInput = {
+    create?: XOR<DreamEntryCreateWithoutUserInput, DreamEntryUncheckedCreateWithoutUserInput> | DreamEntryCreateWithoutUserInput[] | DreamEntryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DreamEntryCreateOrConnectWithoutUserInput | DreamEntryCreateOrConnectWithoutUserInput[]
+    upsert?: DreamEntryUpsertWithWhereUniqueWithoutUserInput | DreamEntryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: DreamEntryCreateManyUserInputEnvelope
+    set?: DreamEntryWhereUniqueInput | DreamEntryWhereUniqueInput[]
+    disconnect?: DreamEntryWhereUniqueInput | DreamEntryWhereUniqueInput[]
+    delete?: DreamEntryWhereUniqueInput | DreamEntryWhereUniqueInput[]
+    connect?: DreamEntryWhereUniqueInput | DreamEntryWhereUniqueInput[]
+    update?: DreamEntryUpdateWithWhereUniqueWithoutUserInput | DreamEntryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: DreamEntryUpdateManyWithWhereWithoutUserInput | DreamEntryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: DreamEntryScalarWhereInput | DreamEntryScalarWhereInput[]
+  }
+
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -7735,6 +7911,34 @@ export namespace Prisma {
     update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
+  }
+
+  export type DreamEntryUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<DreamEntryCreateWithoutUserInput, DreamEntryUncheckedCreateWithoutUserInput> | DreamEntryCreateWithoutUserInput[] | DreamEntryUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: DreamEntryCreateOrConnectWithoutUserInput | DreamEntryCreateOrConnectWithoutUserInput[]
+    upsert?: DreamEntryUpsertWithWhereUniqueWithoutUserInput | DreamEntryUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: DreamEntryCreateManyUserInputEnvelope
+    set?: DreamEntryWhereUniqueInput | DreamEntryWhereUniqueInput[]
+    disconnect?: DreamEntryWhereUniqueInput | DreamEntryWhereUniqueInput[]
+    delete?: DreamEntryWhereUniqueInput | DreamEntryWhereUniqueInput[]
+    connect?: DreamEntryWhereUniqueInput | DreamEntryWhereUniqueInput[]
+    update?: DreamEntryUpdateWithWhereUniqueWithoutUserInput | DreamEntryUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: DreamEntryUpdateManyWithWhereWithoutUserInput | DreamEntryUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: DreamEntryScalarWhereInput | DreamEntryScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutDreamEntriesInput = {
+    create?: XOR<UserCreateWithoutDreamEntriesInput, UserUncheckedCreateWithoutDreamEntriesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDreamEntriesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutDreamEntriesNestedInput = {
+    create?: XOR<UserCreateWithoutDreamEntriesInput, UserUncheckedCreateWithoutDreamEntriesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDreamEntriesInput
+    upsert?: UserUpsertWithoutDreamEntriesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDreamEntriesInput, UserUpdateWithoutDreamEntriesInput>, UserUncheckedUpdateWithoutDreamEntriesInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -7905,6 +8109,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     sessions?: SessionCreateNestedManyWithoutUserInput
+    dreamEntries?: DreamEntryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -7914,6 +8119,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    dreamEntries?: DreamEntryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -7939,6 +8145,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUpdateManyWithoutUserNestedInput
+    dreamEntries?: DreamEntryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -7948,6 +8155,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    dreamEntries?: DreamEntryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -7957,6 +8165,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
+    dreamEntries?: DreamEntryCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -7966,6 +8175,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    dreamEntries?: DreamEntryUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -7991,6 +8201,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    dreamEntries?: DreamEntryUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -8000,6 +8211,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    dreamEntries?: DreamEntryUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AccountCreateWithoutUserInput = {
@@ -8060,6 +8272,29 @@ export namespace Prisma {
 
   export type SessionCreateManyUserInputEnvelope = {
     data: SessionCreateManyUserInput | SessionCreateManyUserInput[]
+  }
+
+  export type DreamEntryCreateWithoutUserInput = {
+    id?: string
+    label: string
+    entry: string
+    createdAt?: Date | string
+  }
+
+  export type DreamEntryUncheckedCreateWithoutUserInput = {
+    id?: string
+    label: string
+    entry: string
+    createdAt?: Date | string
+  }
+
+  export type DreamEntryCreateOrConnectWithoutUserInput = {
+    where: DreamEntryWhereUniqueInput
+    create: XOR<DreamEntryCreateWithoutUserInput, DreamEntryUncheckedCreateWithoutUserInput>
+  }
+
+  export type DreamEntryCreateManyUserInputEnvelope = {
+    data: DreamEntryCreateManyUserInput | DreamEntryCreateManyUserInput[]
   }
 
   export type AccountUpsertWithWhereUniqueWithoutUserInput = {
@@ -8123,6 +8358,89 @@ export namespace Prisma {
     expires?: DateTimeFilter<"Session"> | Date | string
   }
 
+  export type DreamEntryUpsertWithWhereUniqueWithoutUserInput = {
+    where: DreamEntryWhereUniqueInput
+    update: XOR<DreamEntryUpdateWithoutUserInput, DreamEntryUncheckedUpdateWithoutUserInput>
+    create: XOR<DreamEntryCreateWithoutUserInput, DreamEntryUncheckedCreateWithoutUserInput>
+  }
+
+  export type DreamEntryUpdateWithWhereUniqueWithoutUserInput = {
+    where: DreamEntryWhereUniqueInput
+    data: XOR<DreamEntryUpdateWithoutUserInput, DreamEntryUncheckedUpdateWithoutUserInput>
+  }
+
+  export type DreamEntryUpdateManyWithWhereWithoutUserInput = {
+    where: DreamEntryScalarWhereInput
+    data: XOR<DreamEntryUpdateManyMutationInput, DreamEntryUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type DreamEntryScalarWhereInput = {
+    AND?: DreamEntryScalarWhereInput | DreamEntryScalarWhereInput[]
+    OR?: DreamEntryScalarWhereInput[]
+    NOT?: DreamEntryScalarWhereInput | DreamEntryScalarWhereInput[]
+    id?: StringFilter<"DreamEntry"> | string
+    label?: StringFilter<"DreamEntry"> | string
+    entry?: StringFilter<"DreamEntry"> | string
+    createdAt?: DateTimeFilter<"DreamEntry"> | Date | string
+    userId?: StringFilter<"DreamEntry"> | string
+  }
+
+  export type UserCreateWithoutDreamEntriesInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutDreamEntriesInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutDreamEntriesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutDreamEntriesInput, UserUncheckedCreateWithoutDreamEntriesInput>
+  }
+
+  export type UserUpsertWithoutDreamEntriesInput = {
+    update: XOR<UserUpdateWithoutDreamEntriesInput, UserUncheckedUpdateWithoutDreamEntriesInput>
+    create: XOR<UserCreateWithoutDreamEntriesInput, UserUncheckedCreateWithoutDreamEntriesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutDreamEntriesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutDreamEntriesInput, UserUncheckedUpdateWithoutDreamEntriesInput>
+  }
+
+  export type UserUpdateWithoutDreamEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutDreamEntriesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type AccountCreateManyUserInput = {
     id?: string
     type: string
@@ -8142,6 +8460,13 @@ export namespace Prisma {
     id?: string
     sessionToken: string
     expires: Date | string
+  }
+
+  export type DreamEntryCreateManyUserInput = {
+    id?: string
+    label: string
+    entry: string
+    createdAt?: Date | string
   }
 
   export type AccountUpdateWithoutUserInput = {
@@ -8205,6 +8530,27 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     sessionToken?: StringFieldUpdateOperationsInput | string
     expires?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DreamEntryUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    entry?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DreamEntryUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    entry?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DreamEntryUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    entry?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

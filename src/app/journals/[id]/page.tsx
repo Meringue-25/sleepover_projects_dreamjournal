@@ -11,9 +11,9 @@ type Props = {
 
 const ViewJournal = async ({ params }: Props) => {
   const { id } = await params;
-  const journal = await api.dream.get({ id });
-
-  if (journal === null) {
+  const journal = await api.dream.get({ id }).catch(() => {});
+  console.log(journal);
+  if (!journal) {
     // Invalid journal id
     return redirect("/journals");
   }
@@ -22,7 +22,7 @@ const ViewJournal = async ({ params }: Props) => {
     <>
       <Navbar />
       <HydrateClient>
-          <EditDream id={id} />
+        <EditDream id={id} />
       </HydrateClient>
     </>
   );

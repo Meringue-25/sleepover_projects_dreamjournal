@@ -7,17 +7,7 @@ import {
 } from "~/server/api/trpc";
 
 export const dreamRouter = createTRPCRouter({
-  greet: publicProcedure
-    .input(
-      z.object({
-        person: z.string(),
-      }),
-    )
-    .query(({ input }) => {
-      return "Hello " + input.person;
-    }),
-
-  new: publicProcedure
+  new: protectedProcedure
     .input(
       z.object({
         label: z.string(),
@@ -29,19 +19,23 @@ export const dreamRouter = createTRPCRouter({
         data: {
           label: input.label,
           entry: "",
+          userId: ctx.session.user.id,
         },
       });
     }),
 
-  getAll: publicProcedure.query(async ({ ctx }) => {
+  getAll: protectedProcedure.query(async ({ ctx }) => {
     return await ctx.db.dreamEntry.findMany({
+      where: {
+        userId: ctx.session.user.id,
+      },
       orderBy: {
         createdAt: "desc",
       },
     });
   }),
 
-  get: publicProcedure
+  get: protectedProcedure
     .input(
       z.object({
         id: z.string(),
@@ -52,11 +46,12 @@ export const dreamRouter = createTRPCRouter({
       return await ctx.db.dreamEntry.findFirst({
         where: {
           id: input.id,
+          userId: ctx.session.user.id,
         },
       });
     }),
 
-  update: publicProcedure
+  update: protectedProcedure
     .input(
       z.object({
         id: z.string(),
@@ -68,6 +63,7 @@ export const dreamRouter = createTRPCRouter({
       return await ctx.db.dreamEntry.update({
         where: {
           id: input.id,
+          userId: ctx.session.user.id,
         },
         data: {
           label: input.label,
@@ -75,9 +71,11 @@ export const dreamRouter = createTRPCRouter({
         },
       });
     }),
-  delete: publicProcedure
+  delete: protectedProcedure
     .input(z.object({ id: z.string() }))
     .mutation(async ({ ctx, input }) => {
-      await ctx.db.dreamEntry.delete({ where: { id: input.id } });
+      await ctx.db.dreamEntry.delete({
+        where: { id: input.id, userId: ctx.session.user.id },
+      });
     }),
 });

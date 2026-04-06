@@ -44,13 +44,14 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String       @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?      @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
+  dreamEntries  DreamEntry[]
 }
 
 model DreamEntry {
@@ -58,6 +59,9 @@ model DreamEntry {
   label     String
   entry     String
   createdAt DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
 }
 
 model VerificationToken {

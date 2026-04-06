@@ -153,7 +153,8 @@ exports.Prisma.DreamEntryScalarFieldEnum = {
   id: 'id',
   label: 'label',
   entry: 'entry',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  userId: 'userId'
 };
 
 exports.Prisma.VerificationTokenScalarFieldEnum = {
