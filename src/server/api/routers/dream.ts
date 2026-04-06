@@ -75,4 +75,9 @@ export const dreamRouter = createTRPCRouter({
         },
       });
     }),
+  delete: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      await ctx.db.dreamEntry.delete({ where: { id: input.id } });
+    }),
 });
