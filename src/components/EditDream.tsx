@@ -31,13 +31,7 @@ export const EditDream = ({ id }: Props) => {
 
   return (
     <div className="flex flex-col">
-      <span>
-        {updateStatus === "pending"
-          ? "syncing"
-          : synced
-            ? "synced"
-            : "not synced"}
-      </span>
+      <span>{updateStatus === "pending" ? "⏳" : synced ? "✅" : "❌"}</span>
 
       <input
         type="text"

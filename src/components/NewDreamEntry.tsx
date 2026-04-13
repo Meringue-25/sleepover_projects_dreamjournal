@@ -32,7 +32,7 @@ export const NewDreamEntry = () => {
         disabled={status === "pending"}
         onClick={() => newDream({ label })}
       >
-        NewDreamEntry
+        New Dream Entry
       </Button>
     </div>
   );
