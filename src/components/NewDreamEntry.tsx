@@ -22,7 +22,8 @@ export const NewDreamEntry = () => {
   return (
     <div className="flex w-full items-center justify-center gap-4">
       <input
-        className="border-accent-400 rounded-xl border p-4"
+        placeholder="Type your journal title"
+        className="border-accent-400 rounded-xl border p-2"
         value={label}
         onChange={(e) => {
           setLabel(e.target.value);
@@ -32,7 +33,7 @@ export const NewDreamEntry = () => {
         disabled={status === "pending"}
         onClick={() => newDream({ label })}
       >
-        New Dream Entry
+        Create
       </Button>
     </div>
   );

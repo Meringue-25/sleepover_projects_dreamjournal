@@ -31,8 +31,8 @@ export const EditDream = ({ id }: Props) => {
   );
 
   return (
-    <div className="flex flex-col">
-      <span>
+    <div className="bg-background-100/50 mx-auto mt-10 flex w-3/5 flex-col gap-4 rounded-2xl p-8">
+      <span className="text-text-600">
         {updateStatus === "pending" ? (
           <CloudSync size={20} />
         ) : synced ? (
@@ -44,6 +44,7 @@ export const EditDream = ({ id }: Props) => {
 
       <input
         type="text"
+        className="border-accent-300 rounded border p-1"
         value={dream?.label}
         onChange={(e) => {
           if (dream === undefined || dream === null) {
@@ -54,6 +55,7 @@ export const EditDream = ({ id }: Props) => {
         }}
       />
       <textarea
+        className="border-accent-300 rounded border p-1"
         name=""
         id=""
         cols={30}
@@ -83,7 +85,7 @@ export const EditDream = ({ id }: Props) => {
       <div
         id="confirm-delete"
         popover="auto"
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-4"
+        className="bg-background-100 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-xl p-4"
       >
         <Button
           onClick={() => {

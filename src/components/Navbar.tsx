@@ -5,7 +5,7 @@ import SignOutButton from "./SignOutButton";
 const Navbar = async () => {
   const session = await auth();
   return (
-    <nav className="sticky inset-0 flex w-full items-center justify-center gap-16 bg-pink-100 p-4 *:rounded-xl *:border *:border-pink-300 *:p-2">
+    <nav className="bg-secondary-100 *:border-secondary-300 sticky inset-0 flex w-full items-center justify-center gap-16 p-4 text-xl *:rounded-xl *:border *:p-2 *:transition-all *:hover:scale-110">
       <Link href="/">Home</Link>
 
       {!session?.user ? (
