@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { api } from "~/trpc/react";
 import { Button } from "./Button";
 import { useState } from "react";
+import { CloudCheck, CloudOff, CloudSync } from "lucide-react";
 
 type Props = {
   id: string;
@@ -31,7 +32,15 @@ export const EditDream = ({ id }: Props) => {
 
   return (
     <div className="flex flex-col">
-      <span>{updateStatus === "pending" ? "⏳" : synced ? "✅" : "❌"}</span>
+      <span>
+        {updateStatus === "pending" ? (
+          <CloudSync size={20} />
+        ) : synced ? (
+          <CloudCheck size={20} />
+        ) : (
+          <CloudOff size={20} />
+        )}
+      </span>
 
       <input
         type="text"
