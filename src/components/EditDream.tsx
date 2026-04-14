@@ -85,7 +85,7 @@ export const EditDream = ({ id }: Props) => {
       <div
         id="confirm-delete"
         popover="auto"
-        className="bg-background-100 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-xl p-4"
+        className="bg-background-100 absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-1/2 rounded-xl p-4"
       >
         <Button
           onClick={() => {
